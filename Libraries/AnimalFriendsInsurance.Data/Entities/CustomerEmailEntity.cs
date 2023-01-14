@@ -24,7 +24,6 @@ namespace AnimalFriendsInsurance.Data.Entities
         /// <param name="entity">A type of <see cref="EntityTypeBuilder<CustomerEmailEntity>"/></param>
         internal static void OnModelCreating(EntityTypeBuilder<CustomerEmailEntity> entity)
         {
-            entity.HasKey(s => s.Id);
             entity.ToTable("CustomerEmail", "afi");
         }
     }
