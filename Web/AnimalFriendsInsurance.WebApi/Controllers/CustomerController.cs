@@ -34,18 +34,7 @@ namespace AnimalFriendsInsurance.WebApi.Controllers
         /// <returns>A type of <see cref="IActionResult"/></returns>
         [HttpPost]
         public async Task<IActionResult> CreateAsync(CustomerCreateModel model)
-        {
-            // Validate against date of birth and email
-            if (!model.DateOfBirth.HasValue && string.IsNullOrWhiteSpace(model.Email))
-            {
-                ModelState.AddModelError("DobOrEmail", "Neither the customer's date of birth, or email has been supplied");
-            }
-            // Validate against date of birth and email
-            if (model.DateOfBirth.HasValue && !string.IsNullOrWhiteSpace(model.Email))
-            {
-                ModelState.AddModelError("DobOrEmail", "Both the customer's date of birth, or email has been supplied. Only one needs to be supplied");
-            }
-
+        {            
             // Return a 400 response if the model state is not valid.
             if (!ModelState.IsValid)
             {
