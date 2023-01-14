@@ -1,3 +1,4 @@
+using AnimalFriendsInsurance.Business.Customers.Services;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
-
+builder.Services.AddScoped<ICustomerService, CustomerService>();
 
 var app = builder.Build();
 

@@ -1,4 +1,5 @@
 ﻿using AnimalFriendsInsurance.Business.Customers.Models;
+using AnimalFriendsInsurance.Business.Customers.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System.Net;
@@ -12,11 +13,18 @@ namespace AnimalFriendsInsurance.WebApi.Controllers
     [Route("api/[controller]")]
     public class CustomerController : ControllerBase
     {
-        private readonly IActionContextAccessor _actionContextAccessor;
+        /// <summary>
+        /// Instance of <see cref="ICustomerService"/>
+        /// </summary>
+        private readonly ICustomerService _customerService;
 
-        public CustomerController(IActionContextAccessor actionContextAccessor)
+        /// <summary>
+        /// Creates a new instance of <see cref="CustomerController"/>
+        /// </summary>
+        /// <param name="customerService">Instance of <see cref="ICustomerService"/></param>
+        public CustomerController(ICustomerService customerService)
         {
-            _actionContextAccessor = actionContextAccessor;
+            _customerService = customerService;
         }
 
         /// <summary>
@@ -44,7 +52,10 @@ namespace AnimalFriendsInsurance.WebApi.Controllers
                 return BadRequest();
             }
 
-            return Ok();
+            // Creates a new instance of the customer and returns a unique id.
+            var customerSuccess = await _customerService.InsertAsync(model);
+
+            return Ok(customerSuccess);
         }
     }
 }
