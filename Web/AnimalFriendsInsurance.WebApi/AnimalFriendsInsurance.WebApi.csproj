@@ -9,10 +9,12 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Libraries\AnimalFriendsInsurance.Business\AnimalFriendsInsurance.Business.csproj" />
+    <ProjectReference Include="..\..\Libraries\AnimalFriendsInsurance.Data\AnimalFriendsInsurance.Data.csproj" />
   </ItemGroup>
 
 </Project>

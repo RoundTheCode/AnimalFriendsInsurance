@@ -1,5 +1,7 @@
 using AnimalFriendsInsurance.Business.Customers.Services;
+using AnimalFriendsInsurance.Data;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +15,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
-
+builder.Services.AddDbContext<AnimalFriendsInsuranceDataContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AnimalFriendsInsuranceDataContext"));
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
