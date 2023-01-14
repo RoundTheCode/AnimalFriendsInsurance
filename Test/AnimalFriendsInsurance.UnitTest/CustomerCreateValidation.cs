@@ -225,6 +225,10 @@ namespace AnimalFriendsInsurance.UnitTest
             Assert.DoesNotContain(validationResult, s => s.ErrorMessage == CustomerDateOfBirthValidation.MINIMUM_DATE_OF_BIRTH);
         }
 
+        /// <summary>
+        /// Tests that email address in the wrong format throws error
+        /// </summary>
+        /// <param name="email">The email address</param>
         [Theory]
         [InlineData("asas")]
         [InlineData("asas@")]
@@ -241,6 +245,10 @@ namespace AnimalFriendsInsurance.UnitTest
             Assert.Contains(validationResult, s => s.ErrorMessage == CustomerCreateModel.EMAIL_ADDRESS_FORMAT);
         }
 
+        /// <summary>
+        /// Tests that email address in the right format does not throw an error
+        /// </summary>
+        /// <param name="email">The email address</param>
         [Theory]
         [InlineData("asas@asas.com")]
         [InlineData("asas@abc.com")]
@@ -257,6 +265,10 @@ namespace AnimalFriendsInsurance.UnitTest
             Assert.DoesNotContain(validationResult, s => s.ErrorMessage == CustomerCreateModel.EMAIL_ADDRESS_FORMAT);
         }
 
+        /// <summary>
+        /// Email does not end in .co.uk, or .com throws an error
+        /// </summary>
+        /// <param name="email">The email address</param>
         [Theory]
         [InlineData("asas@asas.abc")]
         [InlineData("asas@abc.def")]
@@ -274,6 +286,10 @@ namespace AnimalFriendsInsurance.UnitTest
             Assert.Contains(validationResult, s => s.ErrorMessage == CustomerCreateModel.EMAIL_ADDRESS_END);
         }
 
+        /// <summary>
+        /// Email ends in .co.uk, or .com does not throw an error
+        /// </summary>
+        /// <param name="email">The email address</param>
         [Theory]
         [InlineData("asas@asas.co.uk")]
         [InlineData("asas@abc.com")]
@@ -288,6 +304,44 @@ namespace AnimalFriendsInsurance.UnitTest
             var validationResult = ValidateModel(customerCreateModel);
 
             Assert.DoesNotContain(validationResult, s => s.ErrorMessage == CustomerCreateModel.EMAIL_ADDRESS_END);
+        }
+
+        /// <summary>
+        /// Valid data (with email) throws no errors
+        /// </summary>
+        [Fact]
+        public void Customer_ValidDataWithEmail_ReturnsNoErrors()
+        {
+            var customerCreateModel = new CustomerCreateModel
+            {
+                FirstName = "Dan",
+                Surname = "Man",
+                PolicyReferenceNumber = "AB-123111",
+                Email = "abc@def.com"
+            };
+
+            var validationResult = ValidateModel(customerCreateModel);
+
+            Assert.False(validationResult.Any());
+        }
+
+        /// <summary>
+        /// Valid data (with email) throws no errors
+        /// </summary>
+        [Fact]
+        public void Customer_ValidDataWithDob_ReturnsNoErrors()
+        {
+            var customerCreateModel = new CustomerCreateModel
+            {
+                FirstName = "Dan",
+                Surname = "Man",
+                PolicyReferenceNumber = "AB-123111",
+                DateOfBirth = new DateTime(1985, 1, 1)
+            };
+
+            var validationResult = ValidateModel(customerCreateModel);
+
+            Assert.False(validationResult.Any());
         }
 
         private IList<ValidationResult> ValidateModel<TModel>(TModel model)
