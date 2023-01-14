@@ -172,7 +172,123 @@ namespace AnimalFriendsInsurance.UnitTest
             Assert.Contains(validationResult, s => s.ErrorMessage == CustomerEitherDobOrEmailValidation.BOTH_DOB_EMAIL);
         }
 
+        /// <summary>
+        /// Tests to ensure that someone who is exactly 3 years old cannot register a policy
+        /// </summary>
+        [Theory]
+        [InlineData(-3)]
+        [InlineData(-10)]
+        [InlineData(-17)]
+        public void Dob_Under18Years_ReturnsError(int yearsOld)
+        {
+            var customerCreateModel = new CustomerCreateModel
+            {
+                DateOfBirth = DateTime.Now.Date.AddYears(yearsOld)
+            };
+            var validationResult = ValidateModel(customerCreateModel);
 
+            Assert.Contains(validationResult, s => s.ErrorMessage == CustomerDateOfBirthValidation.MINIMUM_DATE_OF_BIRTH);
+        }
+
+        /// <summary>
+        /// Tests to ensure that someone who is one day away from 18th birthday
+        /// </summary>
+        [Fact]
+        public void Dob_1DayAwayFrom18_ReturnsError()
+        {
+            var customerCreateModel = new CustomerCreateModel
+            {
+                DateOfBirth = DateTime.Now.Date.AddYears(-18).AddDays(1)
+            };
+            var validationResult = ValidateModel(customerCreateModel);
+
+            Assert.Contains(validationResult, s => s.ErrorMessage == CustomerDateOfBirthValidation.MINIMUM_DATE_OF_BIRTH);
+        }
+
+        /// <summary>
+        /// Tests to ensure that someone who is over 18 will not see an error message
+        /// </summary>
+        [Theory]
+        [InlineData(-18)]
+        [InlineData(-23)]
+        [InlineData(-30)]
+        [InlineData(-50)]
+        [InlineData(-70)]
+        public void Dob_Over18_ReturnsNoError(int yearsOld)
+        {
+            var customerCreateModel = new CustomerCreateModel
+            {
+                DateOfBirth = DateTime.Now.Date.AddYears(yearsOld)
+            };
+            var validationResult = ValidateModel(customerCreateModel);
+
+            Assert.DoesNotContain(validationResult, s => s.ErrorMessage == CustomerDateOfBirthValidation.MINIMUM_DATE_OF_BIRTH);
+        }
+
+        [Theory]
+        [InlineData("asas")]
+        [InlineData("asas@")]
+        [InlineData("cd33!!@")]
+        public void Email_WrongFormat_ReturnsError(string email)
+        {
+            var customerCreateModel = new CustomerCreateModel
+            {
+                Email = email
+            };
+            
+            var validationResult = ValidateModel(customerCreateModel);
+
+            Assert.Contains(validationResult, s => s.ErrorMessage == CustomerCreateModel.EMAIL_ADDRESS_FORMAT);
+        }
+
+        [Theory]
+        [InlineData("asas@asas.com")]
+        [InlineData("asas@abc.com")]
+        [InlineData("cd33@sdsd.com")]
+        public void Email_CorrectFormat_ReturnsNoError(string email)
+        {
+            var customerCreateModel = new CustomerCreateModel
+            {
+                Email = email
+            };
+
+            var validationResult = ValidateModel(customerCreateModel);
+
+            Assert.DoesNotContain(validationResult, s => s.ErrorMessage == CustomerCreateModel.EMAIL_ADDRESS_FORMAT);
+        }
+
+        [Theory]
+        [InlineData("asas@asas.abc")]
+        [InlineData("asas@abc.def")]
+        [InlineData("cd33@sdsd.fgf")]
+        [InlineData("cd33@sdsd.com ")]
+        public void Email_DoesNotEndInComCoUk_ReturnsError(string email)
+        {
+            var customerCreateModel = new CustomerCreateModel
+            {
+                Email = email
+            };
+
+            var validationResult = ValidateModel(customerCreateModel);
+
+            Assert.Contains(validationResult, s => s.ErrorMessage == CustomerCreateModel.EMAIL_ADDRESS_END);
+        }
+
+        [Theory]
+        [InlineData("asas@asas.co.uk")]
+        [InlineData("asas@abc.com")]
+        [InlineData("cd33@sdsd.com")]
+        public void Email_EndsInComCoUk_ReturnsNoError(string email)
+        {
+            var customerCreateModel = new CustomerCreateModel
+            {
+                Email = email
+            };
+
+            var validationResult = ValidateModel(customerCreateModel);
+
+            Assert.DoesNotContain(validationResult, s => s.ErrorMessage == CustomerCreateModel.EMAIL_ADDRESS_END);
+        }
 
         private IList<ValidationResult> ValidateModel<TModel>(TModel model)
         {

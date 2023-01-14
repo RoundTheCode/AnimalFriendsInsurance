@@ -7,6 +7,8 @@ namespace AnimalFriendsInsurance.Business.Customers.DataAnnotations
     /// </summary>
     public class CustomerDateOfBirthValidation : ValidationAttribute
     {
+        public const string MINIMUM_DATE_OF_BIRTH = "The customer is younger than 18 years old";
+
         /// <summary>
         /// Minimum age of the policy.
         /// </summary>
@@ -29,7 +31,7 @@ namespace AnimalFriendsInsurance.Business.Customers.DataAnnotations
 
             // Convert to date time.
             if (!DateTime.TryParse(valueString, out DateTime dob))
-            {
+            {                
                 // Not a valid date, so return error.
                 return new ValidationResult("Unable to convert the date of birth to a valid date");
             }
@@ -40,7 +42,7 @@ namespace AnimalFriendsInsurance.Business.Customers.DataAnnotations
             if (dob > minDateOfBirth)
             {
                 // Under minimum date of birth, so return error.
-                return new ValidationResult(string.Format("The customer is younger than {0} year{1} old", minAge, minAge != 1 ? "s" : ""));
+                return new ValidationResult(MINIMUM_DATE_OF_BIRTH);
             }
 
             // Return success
