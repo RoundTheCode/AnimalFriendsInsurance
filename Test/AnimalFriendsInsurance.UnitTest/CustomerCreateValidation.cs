@@ -1,3 +1,4 @@
+using AnimalFriendsInsurance.Business.Customers.DataAnnotations;
 using AnimalFriendsInsurance.Business.Customers.Models;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -142,6 +143,36 @@ namespace AnimalFriendsInsurance.UnitTest
 
             Assert.DoesNotContain(validationResult, s => s.ErrorMessage == CustomerCreateModel.CUSTOMER_POLICY_REFERENCE_FORMAT);
         }
+
+        /// <summary>
+        /// Tests to ensure if an error message is supplied if neither the DOB or email is supplied
+        /// </summary>
+        [Fact]
+        public void DobEmail_NeitherSupplied_ReturnsError()
+        {
+            var customerCreateModel = new CustomerCreateModel();
+            var validationResult = ValidateModel(customerCreateModel);
+
+            Assert.Contains(validationResult, s => s.ErrorMessage == CustomerEitherDobOrEmailValidation.NO_DOB_EMAIL);
+        }
+
+        /// <summary>
+        /// Tests to ensure if an error message is supplied if neither the DOB or email is supplied
+        /// </summary>
+        [Fact]
+        public void DobEmail_BothSupplied_ReturnsError()
+        {
+            var customerCreateModel = new CustomerCreateModel
+            {
+                DateOfBirth = new DateTime(1980, 1, 1),
+                Email = "asasas@asas.com"
+            };
+            var validationResult = ValidateModel(customerCreateModel);
+
+            Assert.Contains(validationResult, s => s.ErrorMessage == CustomerEitherDobOrEmailValidation.BOTH_DOB_EMAIL);
+        }
+
+
 
         private IList<ValidationResult> ValidateModel<TModel>(TModel model)
         {

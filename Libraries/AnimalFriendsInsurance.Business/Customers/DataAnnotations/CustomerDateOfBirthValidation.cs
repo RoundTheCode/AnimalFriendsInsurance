@@ -5,7 +5,7 @@ namespace AnimalFriendsInsurance.Business.Customers.DataAnnotations
     /// <summary>
     /// Validates 
     /// </summary>
-    internal class CustomerDateOfBirthValidation : ValidationAttribute
+    public class CustomerDateOfBirthValidation : ValidationAttribute
     {
         /// <summary>
         /// Minimum age of the policy.

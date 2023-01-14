@@ -12,14 +12,17 @@ namespace AnimalFriendsInsurance.Business.Customers.DataAnnotations
     /// <summary>
     /// Ensures that either the date of birth or email address is supplied
     /// </summary>
-    internal class CustomerEitherDobOrEmailValidation : ValidationAttribute
+    public class CustomerEitherDobOrEmailValidation : ValidationAttribute
     {
+        public const string NO_DOB_EMAIL = "Neither the customer's date of birth or email address has been supplied";
+        public const string BOTH_DOB_EMAIL = "Both the customer's date of birth and email address has been supplied";
+
         protected override ValidationResult IsValid(object? value, ValidationContext validationContext)
         {
             if (validationContext.ObjectInstance == null)
             {
                 // No object instance, so return error
-                return new ValidationResult("Object instance cannot be found");
+                throw new NullReferenceException("validationContext.ObjectInstance does not have an instance");
             }
 
             var customerCreateModel = (CustomerCreateModel)validationContext.ObjectInstance;
@@ -27,12 +30,12 @@ namespace AnimalFriendsInsurance.Business.Customers.DataAnnotations
             if (!customerCreateModel.DateOfBirth.HasValue && string.IsNullOrWhiteSpace(customerCreateModel.Email))
             {
                 // Neither the date of birth or email address has been supplied, so throw error.
-                return new ValidationResult("Neither the customer's date of birth or email address has been supplied");
+                return new ValidationResult(NO_DOB_EMAIL);
             }
             if (customerCreateModel.DateOfBirth.HasValue && !string.IsNullOrWhiteSpace(customerCreateModel.Email))
             {
                 // Both the date of birth and email address has been supplied, so throw error.
-                return new ValidationResult("Both the customer's date of birth and email address has been supplied");
+                return new ValidationResult(BOTH_DOB_EMAIL);
             }
 
             return ValidationResult.Success;            

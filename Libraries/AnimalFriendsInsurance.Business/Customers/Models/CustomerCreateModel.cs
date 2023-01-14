@@ -23,6 +23,7 @@ namespace AnimalFriendsInsurance.Business.Customers.Models
         public const string EMAIL_ADDRESS_END = "Email address must end with .co.uk, or .com";
 
 
+
         /// <summary>
         /// Customer first name
         /// </summary>
