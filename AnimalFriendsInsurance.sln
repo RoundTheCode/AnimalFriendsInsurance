@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33103.184
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{B339F34A-33A9-4D95-9B37-6FAAA8585BC2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{3DBAC0A3-1F89-441E-8AED-5CB915D8DEF6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{90F14F8C-DEC5-4C5E-9671-C31C84C4CEF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimalFriendsInsurance.WebApi", "Web\AnimalFriendsInsurance.WebApi\AnimalFriendsInsurance.WebApi.csproj", "{3D6C6F9E-DF5C-4D08-A6AB-E06AD21D0FFD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimalFriendsInsurance.Data", "Libraries\AnimalFriendsInsurance.Data\AnimalFriendsInsurance.Data.csproj", "{27E97495-483B-4561-91CA-B38B44FBCCD1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimalFriendsInsurance.Business", "Libraries\AnimalFriendsInsurance.Business\AnimalFriendsInsurance.Business.csproj", "{C14A3484-DD82-4485-B89C-57E33E0C0B54}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnimalFriendsInsurance.UnitTest", "Test\AnimalFriendsInsurance.UnitTest\AnimalFriendsInsurance.UnitTest.csproj", "{71F39F59-AEEE-4708-8D82-4C87333139BC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{27E97495-483B-4561-91CA-B38B44FBCCD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27E97495-483B-4561-91CA-B38B44FBCCD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27E97495-483B-4561-91CA-B38B44FBCCD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27E97495-483B-4561-91CA-B38B44FBCCD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C14A3484-DD82-4485-B89C-57E33E0C0B54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C14A3484-DD82-4485-B89C-57E33E0C0B54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C14A3484-DD82-4485-B89C-57E33E0C0B54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C14A3484-DD82-4485-B89C-57E33E0C0B54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71F39F59-AEEE-4708-8D82-4C87333139BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71F39F59-AEEE-4708-8D82-4C87333139BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71F39F59-AEEE-4708-8D82-4C87333139BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71F39F59-AEEE-4708-8D82-4C87333139BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D6C6F9E-DF5C-4D08-A6AB-E06AD21D0FFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D6C6F9E-DF5C-4D08-A6AB-E06AD21D0FFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D6C6F9E-DF5C-4D08-A6AB-E06AD21D0FFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D6C6F9E-DF5C-4D08-A6AB-E06AD21D0FFD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{27E97495-483B-4561-91CA-B38B44FBCCD1} = {B339F34A-33A9-4D95-9B37-6FAAA8585BC2}
+		{C14A3484-DD82-4485-B89C-57E33E0C0B54} = {B339F34A-33A9-4D95-9B37-6FAAA8585BC2}
+		{71F39F59-AEEE-4708-8D82-4C87333139BC} = {90F14F8C-DEC5-4C5E-9671-C31C84C4CEF4}
+		{3D6C6F9E-DF5C-4D08-A6AB-E06AD21D0FFD} = {3DBAC0A3-1F89-441E-8AED-5CB915D8DEF6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D37E4F73-E8AA-456B-922D-BFE5EF3C1A88}
+	EndGlobalSection
+EndGlobal
