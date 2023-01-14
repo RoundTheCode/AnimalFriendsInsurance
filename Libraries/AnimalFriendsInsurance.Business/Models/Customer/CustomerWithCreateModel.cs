@@ -36,7 +36,7 @@ namespace AnimalFriendsInsurance.Business.Models.Customer
         /// <summary>
         /// Customer's date of birth
         /// </summary>         
-        [CustomerDateOfBirthValidation]
+        [DataType(DataType.Date), CustomerDateOfBirthValidation]
         public DateTime? DateOfBirth { get; init; }
 
         /// <summary>
