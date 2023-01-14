@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AnimalFriendsInsurance.Business.Models.DataAnnotations;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -34,7 +35,8 @@ namespace AnimalFriendsInsurance.Business.Models.Customer
 
         /// <summary>
         /// Customer's date of birth
-        /// </summary>
+        /// </summary>         
+        [CustomerDateOfBirthValidation]
         public DateTime? DateOfBirth { get; init; }
 
         /// <summary>
