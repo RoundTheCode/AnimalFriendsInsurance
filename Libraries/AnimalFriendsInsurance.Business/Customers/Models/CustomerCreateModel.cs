@@ -25,7 +25,7 @@ namespace AnimalFriendsInsurance.Business.Customers.Models
         /// <summary>
         /// Policy reference number
         /// </summary>
-        [RegularExpression(@"^([A-Z]{2})\-([0-9]{6})$")]
+        [RegularExpression(@"^([A-Z]{2})\-([0-9]{6})$", ErrorMessage = "The policy reference number should have two capital letters, followed by a dash, followed by 6 numbers")]
         public string? PolicyReferenceNumber { get; init; }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace AnimalFriendsInsurance.Business.Customers.Models
         /// <summary>
         /// Customer's email address
         /// </summary>
-        [EmailAddress, CustomerEitherDobOrEmailValidation]
+        [EmailAddress(ErrorMessage = "The email address is not in a valid format"), CustomerEitherDobOrEmailValidation, RegularExpression(@"(.*)(\.co\.uk|\.com)$", ErrorMessage = "Email address must end with .co.uk, or .com")]
         public string? Email { get; init; }
 
     }
