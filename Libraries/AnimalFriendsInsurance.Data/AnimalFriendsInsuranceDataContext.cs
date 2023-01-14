@@ -11,7 +11,7 @@ namespace AnimalFriendsInsurance.Data
         /// <summary>
         /// Data set for the customers.
         /// </summary>
-        public DbSet<CustomerEntity> Customers { get; private set; }
+        public virtual DbSet<CustomerEntity> Customers { get; set; }
 
         /// <summary>
         /// Creates a new instance of <see cref="AnimalFriendsInsuranceDataContext"/>
