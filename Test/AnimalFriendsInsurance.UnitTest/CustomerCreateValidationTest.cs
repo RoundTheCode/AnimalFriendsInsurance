@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace AnimalFriendsInsurance.UnitTest
 {
-    public class CustomerCreateValidation
+    public class CustomerCreateValidationTest
     {
         /// <summary>
         /// Customer first name empty
