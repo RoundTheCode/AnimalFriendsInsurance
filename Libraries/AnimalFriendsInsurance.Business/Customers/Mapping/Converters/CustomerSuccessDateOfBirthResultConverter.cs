@@ -10,16 +10,16 @@ using System.Threading.Tasks;
 
 namespace AnimalFriendsInsurance.Business.Customers.Mapping.Converters
 {
-    internal class CustomerSuccessResultConverter : ITypeConverter<CustomerEntity, CustomerSuccessResult?>
+    internal class CustomerSuccessDateOfBirthResultConverter : ITypeConverter<CustomerDateOfBirthEntity, CustomerSuccessResult?>
     {
         /// <summary>
-        /// Converts <see cref="CustomerEntity"/> to <see cref="CustomerSuccessResult"/>
+        /// Converts <see cref="CustomerDateOfBirthEntity"/> to <see cref="CustomerSuccessResult"/>
         /// </summary>
-        /// <param name="source">An instance of <see cref="CustomerEntity"/></param>
+        /// <param name="source">An instance of <see cref="CustomerDateOfBirthEntity"/></param>
         /// <param name="destination">An instance of <see cref="CustomerSuccessResult"/></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public CustomerSuccessResult? Convert(CustomerEntity source, CustomerSuccessResult? destination, ResolutionContext context)
+        public CustomerSuccessResult? Convert(CustomerDateOfBirthEntity source, CustomerSuccessResult? destination, ResolutionContext context)
         {
             if (source == null)
             {

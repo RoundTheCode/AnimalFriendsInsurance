@@ -1,3 +1,4 @@
+using AnimalFriendsInsurance.Business.Customers.Mapping;
 using AnimalFriendsInsurance.Business.Customers.Services;
 using AnimalFriendsInsurance.Data;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -6,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddAutoMapper(typeof(CustomerMappingProfile));
 builder.Services.AddControllers();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

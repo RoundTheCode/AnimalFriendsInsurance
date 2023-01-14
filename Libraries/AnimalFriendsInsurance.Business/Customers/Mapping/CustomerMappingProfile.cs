@@ -13,7 +13,7 @@ namespace AnimalFriendsInsurance.Business.Customers.Mapping
     /// <summary>
     /// Stores all the mapping profiles for the customer
     /// </summary>
-    internal class CustomerMappingProfile : Profile
+    public class CustomerMappingProfile : Profile
     {
          /// <summary>
          /// Creates a new instance of <see cref="CustomerMappingProfile"/>
@@ -22,7 +22,8 @@ namespace AnimalFriendsInsurance.Business.Customers.Mapping
         {
             CreateMap(typeof(CustomerCreateModel), typeof(CustomerEmailEntity)).ConvertUsing(typeof(CustomerCreateEmailConverter));
             CreateMap(typeof(CustomerCreateModel), typeof(CustomerDateOfBirthEntity)).ConvertUsing(typeof(CustomerCreateDateOfBirthConverter));
-            CreateMap(typeof(CustomerEntity), typeof(CustomerSuccessResult)).ConvertUsing(typeof(CustomerSuccessResultConverter));
+            CreateMap(typeof(CustomerEmailEntity), typeof(CustomerSuccessResult)).ConvertUsing(typeof(CustomerSuccessEmailResultConverter));
+            CreateMap(typeof(CustomerDateOfBirthEntity), typeof(CustomerSuccessResult)).ConvertUsing(typeof(CustomerSuccessDateOfBirthResultConverter));
         }
     }
 }
