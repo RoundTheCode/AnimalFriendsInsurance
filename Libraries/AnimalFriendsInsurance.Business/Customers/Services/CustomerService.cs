@@ -12,7 +12,7 @@ namespace AnimalFriendsInsurance.Business.Customers.Services
         /// </summary>
         /// <param name="model">Information supplied by the customer</param>
         /// <returns>Stores information when a customer is successfully registered</returns>
-        public async Task<CustomerSuccessResult> InsertAsync(CustomerWithCreateModel model)
+        public async Task<CustomerSuccessResult> InsertAsync(CustomerCreateModel model)
         {
             throw new NotImplementedException();
         }

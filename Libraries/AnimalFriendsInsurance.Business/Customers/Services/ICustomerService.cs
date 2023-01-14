@@ -12,6 +12,6 @@ namespace AnimalFriendsInsurance.Business.Customers.Services
         /// </summary>
         /// <param name="model">Information supplied by the customer</param>
         /// <returns>Stores information when a customer is successfully registered</returns>
-        Task<CustomerSuccessResult> InsertAsync(CustomerWithCreateModel model);
+        Task<CustomerSuccessResult> InsertAsync(CustomerCreateModel model);
     }
 }

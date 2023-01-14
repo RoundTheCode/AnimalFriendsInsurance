@@ -1,17 +1,12 @@
-﻿using AnimalFriendsInsurance.Business.Models.DataAnnotations;
-using System;
-using System.Collections.Generic;
+﻿using AnimalFriendsInsurance.Business.Customers.DataAnnotations;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AnimalFriendsInsurance.Business.Customers.Models
 {
     /// <summary>
     /// API request containing customer data
     /// </summary>
-    public class CustomerWithCreateModel
+    public class CustomerCreateModel
     {
         /// <summary>
         /// Customer first name
@@ -36,13 +31,13 @@ namespace AnimalFriendsInsurance.Business.Customers.Models
         /// <summary>
         /// Customer's date of birth
         /// </summary>         
-        [DataType(DataType.Date), CustomerDateOfBirthValidation]
+        [DataType(DataType.Date), CustomerDateOfBirthValidation, CustomerEitherDobOrEmailValidation]
         public DateTime? DateOfBirth { get; init; }
 
         /// <summary>
         /// Customer's email address
         /// </summary>
-        [EmailAddress]
+        [EmailAddress, CustomerEitherDobOrEmailValidation]
         public string? Email { get; init; }
 
     }

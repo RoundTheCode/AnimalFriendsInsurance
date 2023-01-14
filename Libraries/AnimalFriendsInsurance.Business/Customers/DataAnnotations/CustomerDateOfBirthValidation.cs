@@ -17,21 +17,21 @@ namespace AnimalFriendsInsurance.Business.Customers.DataAnnotations
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public override bool IsValid(object? value)
+        protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
             var valueString = value != null ? value.ToString() : null;
 
             if (string.IsNullOrWhiteSpace(valueString))
             {
-                // No value, so return true.
-                return true;
+                // No value, so return success.
+                return ValidationResult.Success;
             }
 
             // Convert to date time.
             if (!DateTime.TryParse(valueString, out DateTime dob))
             {
-                // Not a valid date, so return false.
-                return false;
+                // Not a valid date, so return error.
+                return new ValidationResult("Unable to convert the date of birth to a valid date");
             }
 
             // Minimum date of birth
@@ -39,12 +39,12 @@ namespace AnimalFriendsInsurance.Business.Customers.DataAnnotations
 
             if (dob > minDateOfBirth)
             {
-                // Under minimum date of birth, so return false.
-                return false;
+                // Under minimum date of birth, so return error.
+                return new ValidationResult(string.Format("The customer is younger than {0} year{1} old", minAge, minAge != 1 ? "s" : ""));
             }
 
-            // Return true
-            return true;
+            // Return success
+            return ValidationResult.Success;
         }
     }
 }
