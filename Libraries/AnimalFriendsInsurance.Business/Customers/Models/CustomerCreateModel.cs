@@ -16,6 +16,7 @@ namespace AnimalFriendsInsurance.Business.Customers.Models
         public const string CUSTOMER_SURNAME_MIN_LENGTH = "Surname must be at least 3 characters";
         public const string CUSTOMER_SURNAME_MAX_LENGTH = "Surname must be no more than 50 characters";
 
+        public const string CUSTOMER_POLICY_REFERENCE_REQUIRED = "The policy reference is required";
         public const string CUSTOMER_POLICY_REFERENCE_FORMAT = "The policy reference number should have two capital letters, followed by a dash, followed by 6 numbers";
 
         public const string EMAIL_ADDRESS_FORMAT = "The email address is not in a valid format";
@@ -41,7 +42,8 @@ namespace AnimalFriendsInsurance.Business.Customers.Models
         /// <summary>
         /// Policy reference number
         /// </summary>
-        [RegularExpression(@"^([A-Z]{2})\-([0-9]{6})$", ErrorMessage = CUSTOMER_POLICY_REFERENCE_FORMAT)]
+        [Required(ErrorMessage = CUSTOMER_POLICY_REFERENCE_REQUIRED),
+            RegularExpression(@"^([A-Z]{2})\-([0-9]{6})$", ErrorMessage = CUSTOMER_POLICY_REFERENCE_FORMAT)]
         public string? PolicyReferenceNumber { get; init; }
 
         /// <summary>

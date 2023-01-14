@@ -96,6 +96,53 @@ namespace AnimalFriendsInsurance.UnitTest
             Assert.Contains(validationResult, s => s.ErrorMessage == CustomerCreateModel.CUSTOMER_SURNAME_MAX_LENGTH);
         }
 
+        /// <summary>
+        /// Test error message when policy reference number is empty.
+        /// </summary>
+        [Fact]
+        public void PolicyReferenceNumber_Empty_ReturnsError()
+        {
+            var customerCreateModel = new CustomerCreateModel();
+            var validationResult = ValidateModel(customerCreateModel);
+
+            Assert.Contains(validationResult, s => s.ErrorMessage == CustomerCreateModel.CUSTOMER_POLICY_REFERENCE_REQUIRED);
+        }
+
+        /// <summary>
+        /// Test error message when policy reference number is in the wrong format
+        /// </summary>
+        /// <param name="policyReferenceNumber">Policy reference number</param>
+        [Theory]
+        [InlineData("a-129121")]
+        [InlineData("as-129121")]
+        [InlineData("a2-343343")]
+        [InlineData("aC-34334C")]
+        public void PolicyReferenceNumber_WrongFormat_ReturnsError(string policyReferenceNumber)
+        {
+            var customerCreateModel = new CustomerCreateModel
+            {
+                PolicyReferenceNumber = policyReferenceNumber
+            };
+            var validationResult = ValidateModel(customerCreateModel);
+
+            Assert.Contains(validationResult, s => s.ErrorMessage == CustomerCreateModel.CUSTOMER_POLICY_REFERENCE_FORMAT);
+        }
+       
+        /// <summary>
+        /// Tests to ensure that error message for policy reference number is in the correct format
+        /// </summary>
+        [Fact]
+        public void PolicyReferenceNumber_RightFormat_ReturnsNoError()
+        {
+            var customerCreateModel = new CustomerCreateModel
+            {
+                PolicyReferenceNumber = "AS-328242"
+            };
+            var validationResult = ValidateModel(customerCreateModel);
+
+            Assert.DoesNotContain(validationResult, s => s.ErrorMessage == CustomerCreateModel.CUSTOMER_POLICY_REFERENCE_FORMAT);
+        }
+
         private IList<ValidationResult> ValidateModel<TModel>(TModel model)
         {
             var validationResults = new List<ValidationResult>();
