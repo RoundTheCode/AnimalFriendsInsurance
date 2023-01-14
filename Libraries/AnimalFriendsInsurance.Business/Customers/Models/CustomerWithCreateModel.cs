@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AnimalFriendsInsurance.Business.Models.Customer
+namespace AnimalFriendsInsurance.Business.Customers.Models
 {
     /// <summary>
     /// API request containing customer data
@@ -16,8 +16,8 @@ namespace AnimalFriendsInsurance.Business.Models.Customer
         /// <summary>
         /// Customer first name
         /// </summary>
-        [MinLength(3, ErrorMessage = "First name must be at least 3 characters"), 
-         MaxLength(50, ErrorMessage ="First name must be no more than 50 characters")]
+        [MinLength(3, ErrorMessage = "First name must be at least 3 characters"),
+         MaxLength(50, ErrorMessage = "First name must be no more than 50 characters")]
         public string? FirstName { get; init; }
 
         /// <summary>

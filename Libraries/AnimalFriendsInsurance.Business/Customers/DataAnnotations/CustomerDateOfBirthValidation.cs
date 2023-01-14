@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AnimalFriendsInsurance.Business.Models.DataAnnotations
+namespace AnimalFriendsInsurance.Business.Customers.DataAnnotations
 {
     /// <summary>
     /// Validates 
@@ -19,7 +19,7 @@ namespace AnimalFriendsInsurance.Business.Models.DataAnnotations
         /// <returns></returns>
         public override bool IsValid(object? value)
         {
-            var valueString = (value != null ? value.ToString() : null);
+            var valueString = value != null ? value.ToString() : null;
 
             if (string.IsNullOrWhiteSpace(valueString))
             {
