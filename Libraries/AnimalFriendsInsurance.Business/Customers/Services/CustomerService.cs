@@ -38,24 +38,17 @@ namespace AnimalFriendsInsurance.Business.Customers.Services
         /// <returns>Stores information when a customer is successfully registered</returns>
         public async Task<CustomerSuccessResult> InsertAsync(CustomerCreateModel model)
         {
-            if (model.DateOfBirth.HasValue)
+            if (model.CustomerTypeEntity == null)
             {
-                var customer = _mapper.Map<CustomerCreateModel, CustomerDateOfBirthEntity>(model);
-                await _dbContext.AddAsync(customer);
-                await _dbContext.SaveChangesAsync();
-
-                return _mapper.Map<CustomerDateOfBirthEntity, CustomerSuccessResult>(customer);
-            }
-            if (!string.IsNullOrWhiteSpace(model.Email))
-            {
-                var customer = _mapper.Map<CustomerCreateModel, CustomerEmailEntity>(model);
-                await _dbContext.AddAsync(customer);
-                await _dbContext.SaveChangesAsync();
-
-                return _mapper.Map<CustomerEmailEntity, CustomerSuccessResult>(customer);
+                // Throw exception if we cannot find the customer type entity
+                throw new NullReferenceException("Unable to find what customer entity to convert to");
             }
 
-            throw new NotImplementedException("Unable to insert customer record into the database");
+            var customer = _mapper.Map(model, typeof(CustomerCreateModel), model.CustomerTypeEntity);
+            await _dbContext.AddAsync(customer);
+            await _dbContext.SaveChangesAsync();
+
+            return _mapper.Map<CustomerSuccessResult>(customer);
         }
     }
 }

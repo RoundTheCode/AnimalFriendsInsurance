@@ -1,5 +1,7 @@
 ﻿using AnimalFriendsInsurance.Business.Customers.DataAnnotations;
+using AnimalFriendsInsurance.Data.Entities;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace AnimalFriendsInsurance.Business.Customers.Models
 {
@@ -21,8 +23,6 @@ namespace AnimalFriendsInsurance.Business.Customers.Models
 
         public const string EMAIL_ADDRESS_FORMAT = "The email address is not in a valid format";
         public const string EMAIL_ADDRESS_END = "Email address must end with .co.uk, or .com";
-
-
 
         /// <summary>
         /// Customer first name
@@ -58,6 +58,29 @@ namespace AnimalFriendsInsurance.Business.Customers.Models
         /// </summary>
         [EmailAddress(ErrorMessage = EMAIL_ADDRESS_FORMAT), CustomerEitherDobOrEmailValidation, RegularExpression(@"(.*)(\.co\.uk|\.com)$", ErrorMessage = "Email address must end with .co.uk, or .com")]
         public string? Email { get; init; }
+
+        /// <summary>
+        /// Gets the entity to convert the customer to
+        /// </summary>
+        /// 
+        [JsonIgnore]
+        public Type? CustomerTypeEntity
+        {
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(Email) && !DateOfBirth.HasValue)
+                {
+                    return typeof(CustomerEmailEntity);
+                }
+
+                if (DateOfBirth.HasValue && string.IsNullOrWhiteSpace(Email))
+                {
+                    return typeof(CustomerDateOfBirthEntity);
+                }
+
+                return null;
+            }
+        }
 
     }
 }
