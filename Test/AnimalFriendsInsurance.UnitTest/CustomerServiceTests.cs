@@ -105,9 +105,9 @@ namespace AnimalFriendsInsurance.UnitTest
         /// </summary>
         /// <returns></returns>
         [Fact]
-        public async Task Customer_NoDobOrEmail_ThrowsNotImplementedException()
+        public async Task Customer_NoDobOrEmail_ThrowsNullReferenceException()
         {
-            Assert.ThrowsAsync<NotImplementedException>(async() => await _customerService.InsertAsync(new CustomerCreateModel
+            await Assert.ThrowsAsync<NullReferenceException>(async() => await _customerService.InsertAsync(new CustomerCreateModel
             {
                 FirstName = "Dan",
                 Surname = "Man",
