@@ -25,10 +25,19 @@ namespace AnimalFriendsInsurance.Business.Customers.Models
         public const string EMAIL_ADDRESS_END = "Email address must end with .co.uk, or .com";
 
         /// <summary>
+        /// List of customer entity convert rules depending on the data supplied
+        /// </summary>
+        private Dictionary<Type, Predicate<CustomerCreateModel>> CustomerEntityConvertRules = new Dictionary<Type, Predicate<CustomerCreateModel>>
+        {
+            { typeof(CustomerEmailEntity), s => !string.IsNullOrWhiteSpace(s.Email) && !s.DateOfBirth.HasValue },
+            { typeof(CustomerDateOfBirthEntity), s => s.DateOfBirth.HasValue && string.IsNullOrWhiteSpace(s.Email) }
+        };
+
+        /// <summary>
         /// Customer first name
         /// </summary>
         [Required(ErrorMessage = CUSTOMER_FIRST_NAME_REQUIRED),
-            MinLength(3, ErrorMessage = CUSTOMER_FIRST_NAME_MIN_LENGTH),
+          MinLength(3, ErrorMessage = CUSTOMER_FIRST_NAME_MIN_LENGTH),
          MaxLength(50, ErrorMessage = CUSTOMER_FIRST_NAME_MAX_LENGTH)]
         public string? FirstName { get; init; }
 
@@ -68,14 +77,13 @@ namespace AnimalFriendsInsurance.Business.Customers.Models
         {
             get
             {
-                if (!string.IsNullOrWhiteSpace(Email) && !DateOfBirth.HasValue)
+                foreach (var rule in CustomerEntityConvertRules)
                 {
-                    return typeof(CustomerEmailEntity);
-                }
-
-                if (DateOfBirth.HasValue && string.IsNullOrWhiteSpace(Email))
-                {
-                    return typeof(CustomerDateOfBirthEntity);
+                    if (rule.Value(this))
+                    {
+                        // Found the type based on the data supplied, so return the type (key)
+                        return rule.Key;
+                    }
                 }
 
                 return null;
