@@ -25,6 +25,7 @@ namespace AnimalFriendsInsurance.Data.Entities
         internal static void OnModelCreating(EntityTypeBuilder<CustomerDateOfBirthEntity> entity)
         {
             entity.ToTable("CustomerDateOfBirth", "afi");
+            entity.Property(s => s.DateOfBirth).HasColumnType("Date");
         }
     }
 }

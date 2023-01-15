@@ -41,7 +41,7 @@ namespace AnimalFriendsInsurance.Business.Customers.Services
             if (model.DateOfBirth.HasValue)
             {
                 var customer = _mapper.Map<CustomerCreateModel, CustomerDateOfBirthEntity>(model);
-                _dbContext.Customers.Add(customer);
+                await _dbContext.AddAsync(customer);
                 await _dbContext.SaveChangesAsync();
 
                 return _mapper.Map<CustomerDateOfBirthEntity, CustomerSuccessResult>(customer);
@@ -49,7 +49,7 @@ namespace AnimalFriendsInsurance.Business.Customers.Services
             if (!string.IsNullOrWhiteSpace(model.Email))
             {
                 var customer = _mapper.Map<CustomerCreateModel, CustomerEmailEntity>(model);
-                _dbContext.Customers.Add(customer);
+                await _dbContext.AddAsync(customer);
                 await _dbContext.SaveChangesAsync();
 
                 return _mapper.Map<CustomerEmailEntity, CustomerSuccessResult>(customer);

@@ -9,11 +9,6 @@ namespace AnimalFriendsInsurance.Data
     public class AnimalFriendsInsuranceDataContext : DbContext
     {
         /// <summary>
-        /// Data set for the customers.
-        /// </summary>
-        public virtual DbSet<CustomerEntity> Customers { get; set; }
-
-        /// <summary>
         /// Creates a new instance of <see cref="AnimalFriendsInsuranceDataContext"/>
         /// </summary>
         public AnimalFriendsInsuranceDataContext() : base()
